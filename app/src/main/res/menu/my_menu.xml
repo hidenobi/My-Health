@@ -3,21 +3,21 @@
     <item
         android:id="@+id/homeFragment"
         android:enabled="true"
-        android:title="@string/home"
-        android:icon="@drawable/bottom_ic_home_selector" />
+        android:icon="@drawable/bottom_ic_home_selector"
+        android:title="@string/home" />
     <item
         android:id="@+id/insightsFragment"
         android:enabled="true"
-        android:title="@string/insights"
-        android:icon="@drawable/bottom_ic_information_selector" />
+        android:icon="@drawable/bottom_ic_information_selector"
+        android:title="@string/insights" />
     <item
         android:id="@+id/alarmFragment"
         android:enabled="true"
-        android:title="@string/alarm"
-        android:icon="@drawable/bottom_ic_alarm_selector" />
+        android:icon="@drawable/bottom_ic_alarm_selector"
+        android:title="@string/alarm" />
     <item
         android:id="@+id/settingFragment"
         android:enabled="true"
-        android:title="@string/setting"
-        android:icon="@drawable/bottom_ic_setting_selector" />
+        android:icon="@drawable/bottom_ic_setting_selector"
+        android:title="@string/setting" />
 </menu>

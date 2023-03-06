@@ -1,14 +1,725 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tint_background"
     tools:context=".homefragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/titleHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="hello home" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/title"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="6sp"
+            android:layout_weight="0.9"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="2sp"
+            android:text="@string/home" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.1"
+            android:contentDescription="@string/go_to_profile"
+            android:src="@drawable/ic_profile" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleHome">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="56dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_title"
+                android:paddingStart="12sp"
+                android:paddingEnd="8sp"
+                android:paddingBottom="6sp">
+
+                <TextView
+                    android:id="@+id/tv_daily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8sp"
+                    android:paddingBottom="12sp"
+                    android:text="@string/daily_activities"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_num_of_steps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36sp"
+                    android:gravity="center"
+                    android:text="@string/number_zero"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:drawableTopCompat="@drawable/ic_steps"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_daily" />
+
+                <TextView
+                    android:id="@+id/tv_num_of_sleeps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36sp"
+                    android:gravity="center"
+                    android:text="@string/number_zero"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:drawableTopCompat="@drawable/ic_bed"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_num_of_steps"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_daily" />
+
+                <TextView
+                    android:id="@+id/tv_num_of_kcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36sp"
+                    android:gravity="center"
+                    android:text="@string/number_zero"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:drawableTopCompat="@drawable/ic_fire"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_num_of_sleeps"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_daily" />
+
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/circularProgressBar_dailySteps"
+                    android:layout_width="60sp"
+                    android:layout_height="60sp"
+                    app:cpb_background_progressbar_color="#b6bbd8"
+                    app:cpb_background_progressbar_width="4sp"
+                    app:cpb_progress="5"
+                    app:cpb_progress_direction="to_right"
+                    app:cpb_progressbar_color="@color/green"
+                    app:cpb_progressbar_width="3sp"
+                    app:cpb_round_border="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/circularProgressBar_dailySleeps"
+                    android:layout_width="51sp"
+                    android:layout_height="51sp"
+                    app:cpb_background_progressbar_color="#b6bbd8"
+                    app:cpb_background_progressbar_width="4sp"
+                    app:cpb_progress="10"
+                    app:cpb_progress_direction="to_right"
+                    app:cpb_progressbar_color="#3f51b5"
+                    app:cpb_progressbar_width="3sp"
+                    app:cpb_round_border="false"
+                    app:layout_constraintBottom_toBottomOf="@id/circularProgressBar_dailySteps"
+                    app:layout_constraintEnd_toEndOf="@id/circularProgressBar_dailySteps"
+                    app:layout_constraintStart_toStartOf="@id/circularProgressBar_dailySteps"
+                    app:layout_constraintTop_toTopOf="@id/circularProgressBar_dailySteps" />
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/circularProgressBar_dailyKcal"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
+                    app:cpb_background_progressbar_color="#b6bbd8"
+                    app:cpb_background_progressbar_width="4sp"
+                    app:cpb_progress="15"
+                    app:cpb_progress_direction="to_right"
+                    app:cpb_progressbar_color="@color/red"
+                    app:cpb_progressbar_width="3sp"
+                    app:cpb_round_border="false"
+                    app:layout_constraintBottom_toBottomOf="@id/circularProgressBar_dailySleeps"
+                    app:layout_constraintEnd_toEndOf="@id/circularProgressBar_dailySleeps"
+                    app:layout_constraintStart_toStartOf="@id/circularProgressBar_dailySleeps"
+                    app:layout_constraintTop_toTopOf="@id/circularProgressBar_dailySleeps" />
+
+                <TextView
+                    android:id="@+id/tv_percent_of_daily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/number_zero_percent"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/circularProgressBar_dailySteps"
+                    app:layout_constraintEnd_toEndOf="@id/circularProgressBar_dailySteps"
+                    app:layout_constraintStart_toStartOf="@id/circularProgressBar_dailySteps"
+                    app:layout_constraintTop_toTopOf="@id/circularProgressBar_dailySteps" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6sp"
+                android:background="@drawable/bg_title"
+                android:paddingStart="12sp"
+                android:paddingEnd="8sp"
+                android:paddingBottom="6sp">
+
+                <TextView
+                    android:id="@+id/tv_steps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8sp"
+                    android:paddingBottom="8sp"
+                    android:text="@string/steps"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_number_of_steps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_zero"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_steps" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="12sp"
+                    android:paddingEnd="0sp"
+                    android:text="@string/max_steps_a_day"
+                    android:textSize="16sp"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_number_of_steps"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_steps" />
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/circularProgressBar"
+                    android:layout_width="60sp"
+                    android:layout_height="60sp"
+                    app:cpb_background_progressbar_color="#b6bbd8"
+                    app:cpb_background_progressbar_width="4sp"
+                    app:cpb_progress="1"
+                    app:cpb_progress_direction="to_right"
+                    app:cpb_progressbar_color="#3f51b5"
+                    app:cpb_progressbar_width="3sp"
+                    app:cpb_round_border="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_percent_of_steps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/number_zero_percent"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/circularProgressBar"
+                    app:layout_constraintEnd_toEndOf="@id/circularProgressBar"
+                    app:layout_constraintStart_toStartOf="@id/circularProgressBar"
+                    app:layout_constraintTop_toTopOf="@id/circularProgressBar" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6sp"
+
+                android:background="@drawable/bg_title"
+                android:paddingStart="12sp"
+                android:paddingEnd="8sp"
+                android:paddingBottom="12sp">
+
+                <TextView
+                    android:id="@+id/tv_practice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8sp"
+                    android:paddingBottom="8sp"
+                    android:text="@string/practice"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_history_practice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8sp"
+                    android:paddingEnd="8sp"
+                    android:paddingBottom="8sp"
+                    android:text="@string/show_history"
+                    android:textColor="@color/black_gray"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry" />
+
+                <ImageView
+                    android:id="@+id/iv_running"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_marginTop="24sp"
+                    android:background="@drawable/bg_running"
+                    android:contentDescription="@string/running"
+                    android:padding="4sp"
+                    android:src="@drawable/ic_running"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_practice"
+                    app:tint="@color/gray" />
+
+                <ImageView
+                    android:id="@+id/iv_walking"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_marginTop="24sp"
+                    android:layout_marginEnd="12sp"
+                    android:background="@drawable/bg_running"
+                    android:contentDescription="@string/walking"
+                    android:padding="4sp"
+                    android:src="@drawable/ic_walk"
+                    app:layout_constraintEnd_toStartOf="@id/iv_running"
+                    app:layout_constraintTop_toBottomOf="@id/tv_practice"
+                    app:tint="@color/gray" />
+
+                <ImageView
+                    android:id="@+id/iv_riding"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginTop="24sp"
+                    android:background="@drawable/bg_running"
+                    android:contentDescription="@string/riding"
+                    android:padding="5sp"
+                    android:src="@drawable/ic_ride_a_bike"
+                    app:layout_constraintStart_toEndOf="@id/iv_running"
+                    app:layout_constraintTop_toBottomOf="@id/tv_practice"
+                    app:tint="@color/gray" />
+
+                <View
+                    android:id="@+id/viewLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2sp"
+                    android:layout_marginStart="16sp"
+                    android:layout_marginTop="16sp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_running" />
+
+                <TextView
+                    android:id="@+id/tv_advice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+                    android:padding="8sp"
+                    android:paddingStart="24sp"
+                    android:paddingEnd="24sp"
+                    android:text="@string/advice"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/iv_light_bulb"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewLine" />
+
+                <ImageView
+                    android:id="@+id/iv_light_bulb"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_marginTop="16sp"
+                    android:layout_marginEnd="4sp"
+                    android:background="@drawable/bg_running"
+                    android:contentDescription="@string/light_bulb"
+                    android:padding="8sp"
+                    android:src="@drawable/ic_light"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewLine"
+                    app:tint="@color/gray" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6sp"
+                android:background="@drawable/bg_title"
+                android:paddingStart="12sp"
+                android:paddingEnd="8sp"
+                android:paddingBottom="12sp">
+
+                <TextView
+                    android:id="@+id/tv_foods"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24sp"
+                    android:paddingTop="8sp"
+                    android:paddingBottom="12sp"
+                    android:text="@string/food"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_max_kcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_zero"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_foods" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="12sp"
+                    android:paddingEnd="0sp"
+                    android:text="@string/max_kcal"
+                    android:textSize="16sp"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_max_kcal"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_foods" />
+
+                <TextView
+                    android:id="@+id/tv_input_food"
+                    android:layout_width="120sp"
+                    android:layout_height="42sp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:text="@string/input"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_foods" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6sp"
+                android:background="@drawable/bg_title"
+                android:paddingStart="12sp"
+                android:paddingEnd="8sp"
+                android:paddingBottom="12sp">
+
+                <TextView
+                    android:id="@+id/tv_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24sp"
+                    android:paddingTop="8sp"
+                    android:paddingBottom="12sp"
+                    android:text="@string/food"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_my_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:text="@string/two_dash"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_weight" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="0sp"
+                    android:text="@string/kg"
+                    android:textSize="18sp"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_my_weight"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_weight" />
+
+                <TextView
+                    android:id="@+id/tv_input_weight"
+                    android:layout_width="120sp"
+                    android:layout_height="42sp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:text="@string/input"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_weight" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6sp"
+                android:background="@drawable/bg_title"
+                android:paddingStart="12sp"
+                android:paddingEnd="8sp"
+                android:paddingBottom="12sp">
+
+                <TextView
+                    android:id="@+id/tv_water"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24sp"
+                    android:paddingTop="8sp"
+                    android:paddingBottom="12sp"
+                    android:text="@string/water"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_number_of_glass_water"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_zero"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_water" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="0sp"
+                    android:text="@string/glass_of_water"
+                    android:textSize="18sp"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_number_of_glass_water"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_water" />
+
+                <TextView
+                    android:id="@+id/tv_plus_water"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:text="@string/plus"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_water" />
+
+                <TextView
+                    android:id="@+id/tv_subtract_water"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
+                    android:layout_marginEnd="12sp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:text="@string/subtract"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_plus_water"
+                    app:layout_constraintTop_toBottomOf="@id/tv_water" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6sp"
+                android:background="@drawable/bg_title"
+                android:paddingStart="12sp"
+                android:paddingEnd="8sp"
+                android:paddingBottom="12sp">
+
+                <TextView
+                    android:id="@+id/tv_sugar_blood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24sp"
+                    android:paddingTop="8sp"
+                    android:paddingBottom="12sp"
+                    android:text="@string/sugar_blood"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_my_sugar_blood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:text="@string/two_dash"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_sugar_blood" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="0sp"
+                    android:text="@string/m_mol_l"
+                    android:textSize="18sp"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_my_sugar_blood"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_sugar_blood" />
+
+                <TextView
+                    android:id="@+id/tv_input_sugar_blood"
+                    android:layout_width="120sp"
+                    android:layout_height="42sp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:text="@string/input"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sugar_blood" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6sp"
+                android:background="@drawable/bg_title"
+                android:paddingStart="12sp"
+                android:paddingEnd="8sp"
+                android:paddingBottom="12sp">
+
+                <TextView
+                    android:id="@+id/tv_blood_pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24sp"
+                    android:paddingTop="8sp"
+                    android:paddingBottom="12sp"
+                    android:text="@string/sugar_blood"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_my_blood_pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:text="@string/two_dash"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_blood_pressure" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="0sp"
+                    android:text="@string/mm_hg"
+                    android:textSize="18sp"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_my_blood_pressure"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_blood_pressure" />
+
+                <TextView
+                    android:id="@+id/tv_input_blood_pressure"
+                    android:layout_width="120sp"
+                    android:layout_height="42sp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:text="@string/input"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_blood_pressure" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
