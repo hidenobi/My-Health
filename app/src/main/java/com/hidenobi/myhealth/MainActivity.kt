@@ -1,7 +1,7 @@
 package com.hidenobi.myhealth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setUpNavController()
         setUpBottomNavigation()
     }
+
     private fun setUpBottomNavigation() {
         binding.bottomNavigation.setupWithNavController(navController)
     }
