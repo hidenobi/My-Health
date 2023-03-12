@@ -37,4 +37,5 @@
     <string name="mm_hg">mmHg</string>
     <string name="two_dash">--</string>
     <string name="kg">kg</string>
+    <string name="weight">Cân nặng</string>
 </resources>

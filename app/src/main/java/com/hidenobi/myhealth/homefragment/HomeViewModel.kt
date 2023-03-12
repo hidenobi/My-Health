@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hidenobi.myhealth.data.stepcounter.StepCounter
+import com.hidenobi.myhealth.data.stepcounter.StepCounterRepository
 import com.hidenobi.myhealth.data.waterintake.WaterIntake
 import com.hidenobi.myhealth.data.waterintake.WaterIntakeRepository
 import com.hidenobi.myhealth.databinding.FragmentHomeBinding
@@ -13,7 +15,10 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeViewModel(private val waterIntakeRepository: WaterIntakeRepository) : ViewModel() {
+class HomeViewModel(
+    private val waterIntakeRepository: WaterIntakeRepository,
+    private val stepCounterRepository: StepCounterRepository
+) : ViewModel() {
 
     // format data
     private val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -21,12 +26,45 @@ class HomeViewModel(private val waterIntakeRepository: WaterIntakeRepository) : 
     private val dateCurrent: String = sdf.format(date)
 
     // MutableLiveData for the user's daily step count
-    private val _stepCount = MutableLiveData(0)
-    val stepCount: LiveData<Int> get() = _stepCount
+    private val _listStepCounter: MutableLiveData<MutableList<StepCounter>> = MutableLiveData()
+    val listStepCounter: LiveData<MutableList<StepCounter>> = _listStepCounter
+    private val _searchStepCounter = MutableLiveData<StepCounter>()
+    val searchStepCounter: LiveData<StepCounter> get() = _searchStepCounter
+    private val _currentStepCounter = MutableLiveData<StepCounter>()
+    val currentStepCounter: LiveData<StepCounter> get() = _currentStepCounter
 
-    // Method to update the user's daily step count
-    fun updateStepCount(newStepCount: Int) {
-        _stepCount.value = newStepCount
+    private fun getListStepCounter() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val listTmp = stepCounterRepository.getAllStepCounter()
+            _listStepCounter.postValue(listTmp)
+        }
+    }
+
+    private fun addStepCounter(stepCounter: StepCounter) {
+        viewModelScope.launch(Dispatchers.IO) {
+            stepCounterRepository.addStepCounter(stepCounter)
+        }
+    }
+
+    private fun updateStepCounter(stepCounter: StepCounter) {
+        viewModelScope.launch(Dispatchers.IO) {
+            stepCounterRepository.updateStepCounter(stepCounter)
+        }
+    }
+
+    fun searchStepCounterByDate() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val stepCounterTmp = stepCounterRepository.searchByDate(dateCurrent)
+            _searchStepCounter.postValue(stepCounterTmp)
+        }
+    }
+
+    fun setCurrentStepCounter() {
+        if (searchStepCounter.value == null) {
+            _currentStepCounter.value = StepCounter(dateCurrent, 0)
+        } else {
+            _currentStepCounter.value = searchStepCounter.value
+        }
     }
 
     // MutableLiveData for the user's sleep time in minutes
@@ -44,7 +82,6 @@ class HomeViewModel(private val waterIntakeRepository: WaterIntakeRepository) : 
     val listWaterIntake: LiveData<MutableList<WaterIntake>> = _listWaterIntake
     private val _searchWaterIntake = MutableLiveData<WaterIntake>()
     private val searchWaterIntake: LiveData<WaterIntake> get() = _searchWaterIntake
-
 
     private fun getListWaterIntake() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -92,7 +129,6 @@ class HomeViewModel(private val waterIntakeRepository: WaterIntakeRepository) : 
         binding.apply {
 
 //            set up daily waterIntake
-
             searchByDate(dateCurrent)
             val newWaterIntake = WaterIntake(dateCurrent, 0)
             if (searchWaterIntake.value == null) {
@@ -112,6 +148,7 @@ class HomeViewModel(private val waterIntakeRepository: WaterIntakeRepository) : 
                 decreaseWaterIntake()
                 tvNumberOfGlassWater.text = waterIntake.value!!.countWaterIntake.toString()
             }
+
 
 //            go to StepCountingScreen
             tvNumOfSteps.setOnClickListener {
