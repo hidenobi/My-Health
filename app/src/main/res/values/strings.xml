@@ -38,4 +38,5 @@
     <string name="two_dash">--</string>
     <string name="kg">kg</string>
     <string name="weight">Cân nặng</string>
+    <string name="notification_step_counter">Bộ đếm bước chân sẽ không hoạt động</string>
 </resources>

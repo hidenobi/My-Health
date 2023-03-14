@@ -32,8 +32,8 @@ class StepCounterService : Service(), SensorEventListener {
 
     // format data
     private val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-    private val date = Date()
-    private val dateCurrent: String = sdf.format(date)
+    private var date = Date()
+    private var dateCurrent: String = sdf.format(date)
 
     // Notification channel ID and name
     private val channelId = "StepCounterChannel"
@@ -72,6 +72,8 @@ class StepCounterService : Service(), SensorEventListener {
 
         scope.launch {
             withContext(Dispatchers.IO) {
+                date = Date()
+                dateCurrent = sdf.format(date)
                 currentStepCounter = stepCounterDao.searchByDate(dateCurrent)
                 if (currentStepCounter == null) {
                     currentStepCounter = StepCounter(dateCurrent, 0)
